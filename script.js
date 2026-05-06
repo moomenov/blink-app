@@ -1,61 +1,54 @@
-const tg = window.Telegram.WebApp;
-tg.expand();
-
-// Foydalanuvchi ismini chiqarish
-if (tg.initDataUnsafe?.user) {
-    document.getElementById('user-name').innerText = tg.initDataUnsafe.user.first_name;
+:root {
+    --gold: #D4AF37;
+    --dark: #121212;
+    --glass: rgba(255, 255, 255, 0.1);
 }
 
-const venues = [
-    { id: 1, name: "Blink Arena", price: "150,000", type: "sport" },
-    { id: 2, name: "Central Hall", price: "250,000", type: "event" },
-    { id: 3, name: "Tennis Club", price: "120,000", type: "sport" }
-];
-
-function renderVenues(filter = 'all') {
-    const list = document.getElementById('venue-list');
-    list.innerHTML = '';
-    
-    venues.forEach(v => {
-        if (filter !== 'all' && v.type !== filter) return;
-        
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `
-            <div class="card-content">
-                <h3>${v.name}</h3>
-                <div class="price">${v.price} so'm / soat</div>
-                <button class="book-btn" onclick="booking(${v.id})">Band qilish</button>
-            </div>
-        `;
-        list.appendChild(card);
-    });
+body {
+    background-color: var(--dark);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
 }
 
-function booking(id) {
-    const venue = venues.find(v => v.id === id);
-    
-    // Botga yuboriladigan ma'lumot obyekti
-    const data = {
-        venue_name: venue.name,
-        price: venue.price,
-        action: 'booking'
-    };
-    
-    tg.showConfirm(`${venue.name}ni band qilmoqchimisiz?`, (ok) => {
-        if (ok) {
-            // MA'LUMOTNI BOTGA YUBORISH
-            tg.sendData(JSON.stringify(data));
-            tg.close();
-        }
-    });
+.container { padding: 20px; }
+
+.stadium-card {
+    background: var(--glass);
+    border-radius: 20px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 20px;
 }
 
-function filterType(type) {
-    document.querySelectorAll('.cat-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    renderVenues(type);
+.stadium-image { height: 250px; background-size: cover; }
+
+.stadium-info { padding: 20px; text-align: center; }
+
+.primary-btn {
+    background: linear-gradient(45deg, var(--gold), #f3cf58);
+    border: none; padding: 12px 30px; border-radius: 25px;
+    font-weight: bold; cursor: pointer; transition: 0.3s;
 }
 
-renderVenues();
+/* Jadval slotlari */
+.time-slots {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px; margin-top: 20px;
+}
+
+.slot {
+    padding: 10px; border: 1px solid var(--gold);
+    border-radius: 8px; text-align: center; cursor: pointer;
+}
+
+.slot.booked { background: #444; color: #888; cursor: not-allowed; border-color: #555; }
+.slot.selected { background: var(--gold); color: black; }
+
+/* Chat Widget */
+.chat-widget {
+    position: fixed; bottom: 20px; right: 20px;
+    width: 300px; background: #1e1e1e; border-radius: 15px; overflow: hidden;
+}
