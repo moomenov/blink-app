@@ -1,7 +1,7 @@
 const tg = window.Telegram.WebApp;
-tg.expand(); // Ilovani to'liq ekranga ochish
+tg.expand();
 
-// Foydalanuvchi ismini o'rnatish
+// Foydalanuvchi ismini chiqarish
 if (tg.initDataUnsafe?.user) {
     document.getElementById('user-name').innerText = tg.initDataUnsafe.user.first_name;
 }
@@ -32,25 +32,30 @@ function renderVenues(filter = 'all') {
     });
 }
 
-function filterType(type) {
-    document.querySelectorAll('.cat-btn').forEach(btn => {
-        btn.classList.remove('active');
-        if(btn.innerText.toLowerCase().includes(type) || (type === 'all' && btn.innerText === 'Hammasi')) {
-            btn.classList.add('active');
-        }
-    });
-    renderVenues(type);
-}
-
 function booking(id) {
     const venue = venues.find(v => v.id === id);
+    
+    // Botga yuboriladigan ma'lumot obyekti
+    const data = {
+        venue_name: venue.name,
+        price: venue.price,
+        action: 'booking'
+    };
+    
     tg.showConfirm(`${venue.name}ni band qilmoqchimisiz?`, (ok) => {
         if (ok) {
-            tg.sendData(JSON.stringify({venue_id: id, action: 'book'}));
+            // MA'LUMOTNI BOTGA YUBORISH
+            tg.sendData(JSON.stringify(data));
             tg.close();
         }
     });
 }
 
-// Birinchi marta yuklanganda
+function filterType(type) {
+    document.querySelectorAll('.cat-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    renderVenues(type);
+}
+
 renderVenues();
