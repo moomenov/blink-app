@@ -2,35 +2,59 @@
 <html lang="uz">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Blink - Premium Booking</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITA STADION | Premium Booking</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Telegram Web App Script -->
-    <script src="https://tg.dev/js/telegram-web-app.js"></script>
 </head>
 <body>
-    <div id="app">
+    <div class="container">
+        <!-- Header Section -->
         <header>
-            <div class="logo">BLINK</div>
-            <div class="user-card">
-                <span id="user-name">Mehmon</span>
-            </div>
+            <h1 class="logo">ITA STADION</h1>
+            <p class="address">📍 Toshkent sh., Chilonzor tumani, 5-mavze</p>
         </header>
 
-        <section class="balance-section">
-            <p>Sizning balansingiz</p>
-            <h2 id="balance">0 so'm</h2>
+        <!-- Stadium Showcase -->
+        <section class="stadium-card">
+            <div class="stadium-image" style="background-image: url('stadium_image.jpg');"></div>
+            <div class="stadium-info">
+                <h3>Asosiy Maydon</h3>
+                <p class="price">Narxi: 250,000 so'm / soat</p>
+                <button id="bookBtn" class="primary-btn">Buyurtma berish</button>
+            </div>
         </section>
 
-        <nav class="categories">
-            <button class="cat-btn active" onclick="filterType('all')">Hammasi</button>
-            <button class="cat-btn" onclick="filterType('sport')">Sport</button>
-            <button class="cat-btn" onclick="filterType('event')">Tadbirlar</button>
-        </nav>
+        <!-- Booking Modal (Jadval) -->
+        <div id="bookingModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Vaqtni tanlang (Haftalik)</h2>
+                <div class="week-selector">
+                    <!-- Kunlar JS orqali qo'shiladi -->
+                </div>
+                <div class="time-slots" id="slotsContainer">
+                    <!-- 17:00 dan 00:00 gacha slotlar -->
+                </div>
+                
+                <div id="paymentSection" class="hidden">
+                    <h3>To'lov qilish</h3>
+                    <p>Karta raqami: <b>8600 0000 0000 0000</b></p>
+                    <p>To'lov summasi: <span id="totalSum">0</span> so'm</p>
+                    <input type="file" id="screenshotUpload" accept="image/*">
+                    <button id="confirmBooking" class="confirm-btn">Tasdiqlash</button>
+                </div>
+            </div>
+        </div>
 
-        <main class="venue-container" id="venue-list">
-            <!-- Ma'lumotlar JS orqali keladi -->
-        </main>
+        <!-- Chat Widget -->
+        <div class="chat-widget" id="chatWidget">
+            <div class="chat-header">Jarvis AI Assistant</div>
+            <div class="chat-body" id="chatBody"></div>
+            <div class="chat-footer">
+                <input type="text" id="chatInput" placeholder="Savolingizni yozing...">
+                <button onclick="sendMessage()">➤</button>
+            </div>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
