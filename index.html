@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Blink - Premium Booking</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Telegram Web App Script -->
+    <script src="https://tg.dev/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <div id="app">
+        <header>
+            <div class="logo">BLINK</div>
+            <div class="user-card">
+                <span id="user-name">Mehmon</span>
+            </div>
+        </header>
+
+        <section class="balance-section">
+            <p>Sizning balansingiz</p>
+            <h2 id="balance">0 so'm</h2>
+        </section>
+
+        <nav class="categories">
+            <button class="cat-btn active" onclick="filterType('all')">Hammasi</button>
+            <button class="cat-btn" onclick="filterType('sport')">Sport</button>
+            <button class="cat-btn" onclick="filterType('event')">Tadbirlar</button>
+        </nav>
+
+        <main class="venue-container" id="venue-list">
+            <!-- Ma'lumotlar JS orqali keladi -->
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
