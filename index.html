@@ -3,56 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ITA STADION | Premium Booking</title>
+    <title>ITA STADION Booking</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <!-- Header Section -->
+    <div class="app-container">
         <header>
-            <h1 class="logo">ITA STADION</h1>
+            <h1>ITA STADION</h1>
             <p class="address">📍 Toshkent sh., Chilonzor tumani, 5-mavze</p>
         </header>
 
-        <!-- Stadium Showcase -->
-        <section class="stadium-card">
-            <div class="stadium-image" style="background-image: url('stadium_image.jpg');"></div>
-            <div class="stadium-info">
-                <h3>Asosiy Maydon</h3>
-                <p class="price">Narxi: 250,000 so'm / soat</p>
-                <button id="bookBtn" class="primary-btn">Buyurtma berish</button>
-            </div>
-        </section>
+        <div class="field-selection">
+            <h3>Maydon turini tanlang:</h3>
+            <select id="field-type">
+                <option value="suniy">Sun'iy maydon (1 ta)</option>
+                <option value="tabiiy" selected>Tabiiy maydon (4 ta)</option>
+            </select>
+        </div>
 
-        <!-- Booking Modal (Jadval) -->
-        <div id="bookingModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Vaqtni tanlang (Haftalik)</h2>
-                <div class="week-selector">
-                    <!-- Kunlar JS orqali qo'shiladi -->
+        <div class="time-selection">
+            <h3>Vaqtni tanlang (Haftalik)</h3>
+            <div class="timetable" id="timetable">
                 </div>
-                <div class="time-slots" id="slotsContainer">
-                    <!-- 17:00 dan 00:00 gacha slotlar -->
-                </div>
-                
-                <div id="paymentSection" class="hidden">
-                    <h3>To'lov qilish</h3>
-                    <p>Karta raqami: <b>8600 0000 0000 0000</b></p>
-                    <p>To'lov summasi: <span id="totalSum">0</span> so'm</p>
-                    <input type="file" id="screenshotUpload" accept="image/*">
-                    <button id="confirmBooking" class="confirm-btn">Tasdiqlash</button>
-                </div>
+        </div>
+
+        <div class="payment-section">
+            <h3>To'lov ma'lumotlari</h3>
+            <div class="card-box">
+                <p>Karta: <strong>5614 6814 0522 1999</strong></p>
+                <p>Eshasi: <strong>Mo'minov X.</strong></p>
+            </div>
+            <p class="total-text">To'lov summasi: <span id="total-price">0</span> so'm</p>
+            
+            <div class="upload-area">
+                <input type="file" id="file-input" hidden>
+                <label for="file-input" class="file-label">Chekni yuklash</label>
+                <button class="confirm-btn">Tasdiqlash</button>
             </div>
         </div>
 
-        <!-- Chat Widget -->
-        <div class="chat-widget" id="chatWidget">
-            <div class="chat-header">Jarvis AI Assistant</div>
-            <div class="chat-body" id="chatBody"></div>
-            <div class="chat-footer">
-                <input type="text" id="chatInput" placeholder="Savolingizni yozing...">
-                <button onclick="sendMessage()">➤</button>
+        <div class="jarvis-chat">
+            <p class="jarvis-title">Jarvis AI Assistant</p>
+            <div class="input-group">
+                <input type="text" id="chat-input" placeholder="Savolingizni yozing...">
+                <button id="send-chat">➤</button>
             </div>
         </div>
     </div>
